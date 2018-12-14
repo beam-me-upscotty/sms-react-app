@@ -1,28 +1,45 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import LoginForm from './components/LoginForm'
+import Dashboard from './components/Dashboard';
+import './App.css'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+class App extends React.Component{
+
+    constructor(props){
+        super(props);
+        if(localStorage.getItem('token') === null){
+            this.state = {
+                isLoggedIn:false,
+            }
+        }
+        else{
+            this.state = {
+                isLoggedIn:true,
+            }
+        }
+        console.log(this.state)
+    }
+
+    render(){
+        if(this.state.isLoggedIn === false){
+            return (<LoginForm refresh={this.refreshApp}/>);
+        }
+        else{
+            return (<Dashboard/>)
+        }
+    }
+
+    refreshApp = async(response) => {
+        if(response){
+            if(localStorage.getItem('token') === null){
+                this.setState({isLoggedIn : false});
+            }
+            else{
+                this.setState({isLoggedIn : true});
+            }
+        }
+
+    }
 }
 
 export default App;
