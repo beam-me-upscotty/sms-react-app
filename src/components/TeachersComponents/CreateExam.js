@@ -67,7 +67,7 @@ class CreateExam extends Component{
                 <FormControl variant="outlined" className={classes.formControl}>
                     <InputLabel
                         ref={ref => {
-                        this.InputLabelRef = ref;
+                        this.InputLabelRef = ref;   
                         }}
                         htmlFor="outlined-age-simple"
                     >
